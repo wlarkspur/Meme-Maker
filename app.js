@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById("save");
 const textInput = document.getElementById("text");
 const file = document.getElementById("file");
 const modeBtn = document.getElementById("mode-btn");
@@ -36,6 +37,7 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false;
+  ctx.fill();
   ctx.beginPath();
 }
 
@@ -109,6 +111,14 @@ function onDoubleClick(event) {
   }
 }
 
+function onSaveClick() {
+  const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing.png";
+  a.click();
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 document.addEventListener("mousedown", startPainting);
@@ -126,3 +136,4 @@ destroyBtn.addEventListener("click", destroyButton);
 eraseBtn.addEventListener("click", eraseButton);
 //canvas.addEventListener("click", dot);
 file.addEventListener("change", onFileChange);
+save.addEventListener("click", onSaveClick);
